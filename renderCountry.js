@@ -40,7 +40,4 @@ export const renderCountryData = function (data, className = '') {
 
   // Insert the generated HTML into the DOM inside the countries container
   countriesContainer.insertAdjacentHTML('beforeend', html);
-
-  // Make the countries container visible by setting its opacity to 1
-  countriesContainer.style.opacity = 1;
 };

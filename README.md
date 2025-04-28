@@ -49,3 +49,38 @@ This document provides an overview of synchronous and asynchronous programming i
     - APIs often use JSON (JavaScript Object Notation) for data exchange.
     - JSON is a lightweight data format that is easy to read and understand for both humans and machines.
 
+### Promises
+
+- **Definition**: A Promise is an object in JavaScript that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+- **Purpose**:
+    - Simplifies handling asynchronous operations.
+    - Avoids "callback hell" by chaining `.then()` and `.catch()` methods.
+- **Key Points**:
+    - A Promise can be in one of three states:
+        1. **Pending**: The operation has not yet completed.
+        2. **Fulfilled**: The operation completed successfully.
+        3. **Rejected**: The operation failed.
+    - Promises are chainable, allowing cleaner and more readable code.
+
+#### Example
+
+```javascript
+// Creating a Promise
+const fetchData = new Promise((resolve, reject) => {
+        const success = true; // Simulate success or failure
+        if (success) {
+                resolve("Data fetched successfully!");
+        } else {
+                reject("Error fetching data.");
+        }
+});
+
+// Using the Promise
+fetchData
+        .then((message) => {
+                console.log(message); // Output: Data fetched successfully!
+        })
+        .catch((error) => {
+                console.error(error); // Output: Error fetching data.
+        });
+```
