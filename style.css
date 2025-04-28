@@ -25,13 +25,13 @@ body {
   flex-flow: column;
   align-items: center;
   width: 90%;
-    max-width: 1200px;
+  max-width: 1200px;
 }
 
 .countries {
   display: flex;
   flex-wrap: wrap;
-    justify-content: center;
+  justify-content: center;
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -42,7 +42,7 @@ body {
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
   font-size: 1.8rem;
   width: 100%;
-    max-width: 30rem;
+  max-width: 30rem;
   border-radius: 0.7rem;
   margin: 1.5rem;
 }
@@ -67,7 +67,7 @@ body {
 
 .country__img {
   width: 100%;
-    height: auto;
+  height: auto;
   object-fit: cover;
   background-color: #eee;
   border-top-left-radius: 0.7rem;
@@ -100,7 +100,13 @@ body {
   font-size: 2.4rem;
 }
 
-.btn-country {
+.btn-container {
+  display: flex;
+  flex-flow: row;
+}
+
+.btn-country,
+.btn-reload {
   border: none;
   font-size: 2rem;
   padding: 2rem 5rem;
@@ -108,24 +114,25 @@ body {
   color: white;
   background-color: orangered;
   cursor: pointer;
+  margin: 10px;
 }
 
 .images {
   display: flex;
   flex-wrap: wrap;
-    justify-content: center;
+  justify-content: center;
 }
 
 .images img {
   display: block;
   width: 100%;
-    max-width: 80rem;
+  max-width: 80rem;
   margin: 4rem;
 }
 
 .images img.parallel {
   width: 100%;
-    max-width: 40rem;
+  max-width: 40rem;
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
@@ -142,7 +149,13 @@ body {
     padding: 2rem;
   }
 
-  .btn-country {
+    .btn-container {
+      flex-flow: column;
+      align-items: center;
+    }
+  
+    .btn-country,
+    .btn-reload {
     font-size: 1.8rem;
     padding: 1.5rem 4rem;
   }
@@ -162,7 +175,13 @@ body {
     margin: 1rem;
   }
 
-  .btn-country {
+    .btn-container {
+      flex-flow: column;
+      align-items: center;
+    }
+  
+    .btn-country,
+    .btn-reload {
     font-size: 1.6rem;
     padding: 1rem 3rem;
   }

@@ -2,7 +2,7 @@
 
 // Importing utility functions and DOM elements
 import { renderCountryData } from './renderCountry.js';
-import { btn, countriesContainer } from './domElement.js';
+import { btn, btnReload, countriesContainer } from './domElement.js';
 
 // Function to render error messages in the DOM
 const renderError = function (msg) {
@@ -68,4 +68,14 @@ const getCountry = async function (country) {
 btn.addEventListener('click', function () {
   btn.disabled = true; // Disable the button to prevent multiple clicks
   getCountry('bharat'); // Fetch data for the country
+});
+
+// Add event listener to the reload button to reset the UI
+btnReload.addEventListener('click', () => {
+  // Clear the content of the countries container
+  countriesContainer.innerHTML = '';
+  // Reset the opacity of the container
+  countriesContainer.style.opacity = 0;
+  // Re-enable the main button for fetching country data
+  btn.disabled = false;
 });
