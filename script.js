@@ -1,53 +1,71 @@
 'use strict';
 
+// Importing utility functions and DOM elements
 import { renderCountryData } from './renderCountry.js';
 import { btn, countriesContainer } from './domElement.js';
 
 // Function to render error messages in the DOM
 const renderError = function (msg) {
-  // Insert the error message into the countries container
   countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
 };
 
-// Function to fetch and display data for a given country and its neighbors
-const getCountry = function (country) {
-  // Fetch data for the specified country using the REST Countries API
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => response.json()) // Parse the JSON response
-    .then(data => {
-      // Render the main country's data in the DOM
-      renderCountryData(data[0]);
-
-      // Extract the neighboring countries' codes from the response
-      const neighbourCountry = data[0].borders;
-
-      // If the country has no neighbors, exit the function
-      if (!neighbourCountry) return;
-
-      // Loop through each neighboring country's code
-      neighbourCountry.forEach(code => {
-        // Fetch data for the neighboring country using its code
-        fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-          .then(response => response.json()) // Parse the JSON response
-          .then(data => {
-            // Render the neighbor country's data in the DOM
-            renderCountryData(data[0], 'neighbour');
-          })
-          .catch(err => {
-            // Handle errors and display an error message in the DOM
-            renderError(`Failed to determine location: ${err.message}`);
-            countriesContainer.style.opacity = 1;
-          })
-          .finally(() => {
-            // Ensure the countries container is visible after data is fetched
-            countriesContainer.style.opacity = 1;
-          });
-      });
-    });
+// Function to fetch JSON data from a given URL and handle errors
+const fetchJSON = async function (url, errorMsg = 'Something went wrong') {
+  try {
+    const response = await fetch(url);
+    // Throw an error if the response is not OK
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+    return await response.json();
+  } catch (err) {
+    // Render error message and rethrow the error
+    renderError(err.message);
+    throw err;
+  }
 };
 
-// Add a click event listener to the button to fetch and display data for Canada
+// Function to fetch and render data for a given country and its neighbors
+const getCountry = async function (country) {
+  try {
+    // Fetch country data
+    const data = await fetchJSON(
+      `https://restcountries.com/v3.1/name/${country}`,
+      `Country not found`
+    );
+
+    // Render the main country data
+    renderCountryData(data[0]);
+
+    // Get neighboring countries (if any)
+    const neighbourCountries = data[0].borders;
+
+    // If no neighbors, exit the function
+    if (!neighbourCountries) return;
+
+    // Fetch and render data for each neighboring country
+    for (const code of neighbourCountries) {
+      try {
+        const neighbourData = await fetchJSON(
+          `https://restcountries.com/v3.1/alpha/${code}`,
+          `Neighbor country not found`
+        );
+        renderCountryData(neighbourData[0], 'neighbour');
+      } catch (err) {
+        // Render error message for failed neighbor fetch
+        renderError(`Failed to fetch neighbor: ${err.message}`);
+      }
+    }
+  } catch (err) {
+    // Render error message for failed country fetch
+    renderError(`Failed to fetch country: ${err.message}`);
+  } finally {
+    // Ensure the container is visible
+    countriesContainer.style.opacity = 1;
+  }
+};
+
+// Add event listener to the button to fetch data for the country 'bharat'
 btn.addEventListener('click', function () {
-  // Call the getCountry function with 'canada' as the argument
-  getCountry('bharat');
+  btn.disabled = true; // Disable the button to prevent multiple clicks
+  getCountry('bharat'); // Fetch data for the country
 });
