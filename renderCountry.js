@@ -4,7 +4,7 @@ export const renderCountryData = function (data, className = '') {
   const html = `<article class="country ${className}">
                                         <!-- Display the country's flag -->
                                         <img class="country__img" src="${
-                                          data.flags.png
+                                          data.flags?.png
                                         }" />
                                         <div class="country__data">
                                                 <!-- Display the country's name -->

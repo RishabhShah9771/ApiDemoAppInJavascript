@@ -49,6 +49,8 @@ This document provides an overview of synchronous and asynchronous programming i
     - APIs often use JSON (JavaScript Object Notation) for data exchange.
     - JSON is a lightweight data format that is easy to read and understand for both humans and machines.
 
+---
+
 ### Promises
 
 - **Definition**: A Promise is an object in JavaScript that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
@@ -84,3 +86,53 @@ fetchData
                 console.error(error); // Output: Error fetching data.
         });
 ```
+
+---
+
+### Async/Await
+
+- **Definition**: `async/await` is a modern syntax in JavaScript that simplifies working with Promises, making asynchronous code look and behave more like synchronous code.
+- **Purpose**:
+    - Provides a cleaner and more readable way to handle asynchronous operations.
+    - Avoids chaining `.then()` and `.catch()` methods, reducing complexity.
+- **Key Points**:
+    - `async` functions always return a Promise.
+    - `await` pauses the execution of an `async` function until the Promise is resolved or rejected.
+    - Error handling can be done using `try...catch` blocks.
+
+#### Example
+
+```javascript
+// Simulating an asynchronous operation
+const fetchData = () => {
+        return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                        const success = true; // Simulate success or failure
+                        if (success) {
+                                resolve("Data fetched successfully!");
+                        } else {
+                                reject("Error fetching data.");
+                        }
+                }, 2000); // Simulate a 2-second delay
+        });
+};
+
+// Using async/await
+const getData = async () => {
+        try {
+                const message = await fetchData(); // Wait for the Promise to resolve
+                console.log(message); // Output: Data fetched successfully!
+        } catch (error) {
+                console.error(error); // Output: Error fetching data.
+        }
+};
+
+getData();
+```
+
+- **Advantages**:
+    - Makes asynchronous code easier to read and maintain.
+    - Reduces the risk of "callback hell" and improves code structure.
+- **Limitations**:
+    - Still requires understanding of Promises.
+    - Cannot be used outside of an `async` function.
