@@ -1,6 +1,10 @@
 // Importing utility functions and DOM elements
-import { renderCountryData } from './renderCountry.js'; // Function to render country data in the DOM
-import { btn, btnReload, countriesContainer } from './domElement.js'; // DOM elements for interaction
+import { renderCountryData } from './ExtraComponents/renderCountry.js'; // Function to render country data in the DOM
+import {
+  btn,
+  btnReload,
+  countriesContainer,
+} from './ExtraComponents/domElement.js'; // DOM elements for interaction
 
 // Utility function to fetch JSON data from a given URL
 const fetchJSON = async (url, errorMsg = 'Something went wrong') => {

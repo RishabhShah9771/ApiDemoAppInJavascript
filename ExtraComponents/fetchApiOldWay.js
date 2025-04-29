@@ -1,4 +1,4 @@
-import { renderCountryData } from './renderCountry.js';
+import { renderCountryData } from '../renderCountry.js';
 
 // Function to fetch and display country data
 const getCountryData = function (country) {
