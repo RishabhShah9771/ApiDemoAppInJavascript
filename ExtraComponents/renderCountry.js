@@ -1,4 +1,4 @@
-import { countriesContainer } from './ExtraComponents/domElement.js';
+import { countriesContainer } from './domElement.js';
 export const renderCountryData = function (data, className = '') {
   // Generate an HTML template to display the country's information
   const html = `<article class="country ${className}">
