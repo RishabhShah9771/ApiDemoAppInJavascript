@@ -1,3 +1,5 @@
+'use strict';
+
 // Importing utility functions and DOM elements
 import { renderCountryData } from './ExtraComponents/renderCountry.js'; // Function to render country data in the DOM
 import {
@@ -6,7 +8,7 @@ import {
   countriesContainer,
 } from './ExtraComponents/domElement.js'; // DOM elements for interaction
 
-// Utility function to fetch JSON data from a given URL
+// // Utility function to fetch JSON data from a given URL
 const fetchJSON = async (url, errorMsg = 'Something went wrong') => {
   const response = await fetch(url); // Fetch data from the URL
   if (!response.ok) throw new Error(`${errorMsg} (${response.status})`); // Throw error if response is not OK

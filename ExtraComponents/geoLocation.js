@@ -44,3 +44,49 @@
 
 // // Export the locationHandler function for use in other modules
 // export { locationHandler };
+
+// Promise All Exmaple:
+// If we want to fetch multiple data at once, we can use promise.all
+// It takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved
+// or when the iterable contains no promises. It rejects with the reason of the first promise that rejects.
+// const get3Countries = async function (country, country2, country3) {
+//   try {
+//     // const [data1] = await fetchJSON(
+//     //   `https://restcountries.com/v3.1/name/${country}`,
+//     //   'Country not found'
+//     // );
+//     // const [data2] = await fetchJSON(
+//     //   `https://restcountries.com/v3.1/name/${country2}`,
+//     //   'Country not found'
+//     // );
+//     // const [data3] = await fetchJSON(
+//     //   `https://restcountries.com/v3.1/name/${country3}`,
+//     //   'Country not found'
+//     // );
+
+//     const data = await Promise.all([
+//       fetchJSON(`https://restcountries.com/v3.1/name/${country}`),
+//       fetchJSON(`https://restcountries.com/v3.1/name/${country2}`),
+//       fetchJSON(`https://restcountries.com/v3.1/name/${country3}`),
+//     ]);
+//     console.log(data.map(d => d[0].capital));
+//   } catch (err) {
+//     console.error(`${err} 💥💥💥`);
+//   }
+// };
+// get3Countries('portugal', 'canada', 'bharat');
+
+// Promise Race
+// We only get one result not the all results
+// It takes an array of promises and returns a single promise that resolves or rejects as soon as one of  the promises in the iterable resolves or objects.
+// It does not wait for all of the promises to complete and it does not care about the order of the promises.
+// It is useful when you want to get the result of the first promise that resolves or rejects.
+
+// (async function () {
+//   const res = await Promise.race([
+//     fetchJSON(`https://restcountries.com/v3.1/name/italy`),
+//     fetchJSON(`https://restcountries.com/v3.1/name/egypt`),
+//     fetchJSON(`https://restcountries.com/v3.1/name/mexico`),
+//   ]);
+//   console.log(res[0]);
+// })();
